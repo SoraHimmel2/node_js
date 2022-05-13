@@ -1,0 +1,48 @@
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+
+    <body>
+
+        <div class="main-content">
+            <div class="header">
+                <div>Incidents</div>
+            </div>
+            <div class="block-content">
+                <div class="create-person content">
+                    <div class="create-person-title">
+                        <div class="w3-container w3-theme">
+                            <h3>Добавить Человека</h3>
+                        </div>
+                    </div>
+                    <form action="/blogs" method="POST" class="form-person" id="form-person">
+                        <label for="surname">Фамилия</label>
+                        <input type="text" id="surname" name="surname" required>
+
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="patronymic">Отчество</label>
+                        <input type="text" id="patronymic" name="patronymic" required>
+
+                        <label for="place_of_residence">Адрес</label>
+                        <input type="text" id="place_of_residence" name="place_of_residence" required>
+
+                        <label for="criminal-record-count">Количество Судимостей</label>
+                        <input type="text" id="criminal-record-count" name="criminal_record_count" required>
+
+                        <button class="form-button"> Создать</button>
+                    </form>
+                </div>
+                <div></div>
+                <%- include("../partials/search_list.ejs") %>
+            </div>
+            <div class="footer">
+                <%- include("../partials/footer.ejs") %>
+            </div>
+
+        </div>
+    </body>
+
+</html>

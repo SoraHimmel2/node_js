@@ -1,0 +1,58 @@
+<html lang="en">
+
+<%- include("../partials/head.ejs") %>
+
+
+    <body>
+
+        <div class="main-content">
+            <div class="header">
+                <div>Incidents</div>
+            </div>
+            <div class="block-content">
+                <div class="create-person content">
+                    <div class="create-person-title">
+                        <div class="w3-container w3-theme">
+                            <h3>Добавить Инцидент</h3>
+                        </div>
+                    </div>
+                    <form action="/blogs" method="POST" class="form-person" id="form-person">
+                        <label for="registration_date">Дата Регистрации</label>
+                        <input type="date" id="registration_date" name="registration_date" required>
+
+                        <label for="description">Описание(фабула)</label>
+                        <input type="text" id="description" name="description" required>
+
+                        <label for="list-items-select">Принятое Решение</label>
+                        
+
+                        <select class="list-items-select" form="form-person" name="resolution_result" id="resolution_result">
+                            <option value="Отказано в возбуждении дела.">
+                                Отказано в возбуждении дела.
+                            </option>
+                            <option value="Удовлетворено ходотайство об возбуждении уголовного дела.">
+                                Удовлетворено ходотайство об возбуждении уголовного дела.
+                            </option>
+                            <option value="Отправлено по территориальному признаку.">
+                                Отправлено по территориальному признаку.
+                            </option>
+                        </select>
+                        <label for="case-number">Регистрационный номер заведенного дела</label>
+                        <input type="text" id="case-number" name="case_number">
+
+                       
+
+                        <button class="form-button"> Создать</button>
+                    </form>
+                </div>
+                <div></div>
+                <%- include("../partials/search_list.ejs") %>
+            </div>
+            <div class="footer">
+                <%- include("../partials/footer.ejs") %>
+            </div>
+
+        </div>
+    </body>
+
+</html>
