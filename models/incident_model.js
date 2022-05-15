@@ -27,7 +27,11 @@ async function incident_get_all_data(){
         pool.connect();
        
        const result = await pool.query(
-        `SELECT * FROM "incident";`);
+        `SELECT registration_number,
+        TO_CHAR(registration_date,'YYYY:MM:DD') registration_date,
+        description,
+        resolution_result,
+        case_number FROM "incident";`);
         
         return result;
     } catch (error) {

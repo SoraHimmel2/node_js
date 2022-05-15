@@ -27,11 +27,11 @@
                         
 
                         <select class="list-items-select" form="form-person" name="resolution_result" id="resolution_result">
-                            <option value="Отказано в возбуждении дела.">
-                                Отказано в возбуждении дела.
-                            </option>
                             <option value="Удовлетворено ходотайство об возбуждении уголовного дела.">
                                 Удовлетворено ходотайство об возбуждении уголовного дела.
+                            </option>
+                            <option value="Отказано в возбуждении дела.">
+                                Отказано в возбуждении дела.
                             </option>
                             <option value="Отправлено по территориальному признаку.">
                                 Отправлено по территориальному признаку.
@@ -46,7 +46,7 @@
                     </form>
                 </div>
                 <div></div>
-                <%- include("../partials/search_list.ejs") %>
+                <%- include("../partials/search_list.ejs",{title:'Люди'}) %>
             </div>
             <div class="footer">
                 <%- include("../partials/footer.ejs") %>

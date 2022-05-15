@@ -86,12 +86,12 @@ async function addListElements(parentSelector, url, rowKeys, rowId) {
 
 }
 
-async function dispatchData(formUrl, intermediaryUrl, formData) {
+async function dispatchData(formUrl, intermediaryUrl, formData,listElementSelector) {
     const resultId = await sendData(formData, formUrl);
     console.log(resultId);
     if (resultId.result != 'already-exist') {
         const parts = [];
-        let elements = document.querySelectorAll('.container-end-part');
+        let elements = document.querySelectorAll(listElementSelector);
         elements.forEach(element => {
             if (element.firstElementChild.checked) {
                 let parentElement = element.parentElement;
@@ -110,6 +110,18 @@ async function dispatchData(formUrl, intermediaryUrl, formData) {
     return false;
   
 }
+function restrictInput(select,input){
+    if(select.value != 'Удовлетворено ходотайство об возбуждении уголовного дела.'){
+        input.disabled = true;
+    }else{
+        input.disabled = false;
+    }
+}
+
+function redirect(url){
+    window.location.href = url;
+}
+
 export {
     sendData,
     getFormData,
@@ -117,4 +129,7 @@ export {
     createListElement,
     addListElements,
     dispatchData,
+    restrictInput,
+    redirect,
+    
 }

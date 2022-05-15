@@ -1,7 +1,8 @@
 const express = require('express');
 const incidentController = require('../controllers/incident_controller');
 const personController = require('../controllers/person_controller');
-const intermediary = require('../controllers/intermediary_controller');
+const intermediaryController = require('../controllers/intermediary_controller');
+const index = require('../controllers/index_controller');
 
 
 const router = express.Router();
@@ -14,8 +15,10 @@ router.get('/create_person',personController.person_create);
 router.post('/get_all_persons',personController.person_get_all);
 router.post('/create_person',personController.person_create_post);
 
-router.post('/incident_intermediary',intermediary.incident_part);
-router.post('/person_intermediary',intermediary.person_part);
+router.post('/incident_intermediary',intermediaryController.incident_part);
+router.post('/person_intermediary',intermediaryController.person_part);
+
+router.get('/main_page',index.index_index);
 
 
 module.exports = router;

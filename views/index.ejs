@@ -1,0 +1,25 @@
+<html lang="en">
+
+<%- include("./partials/head.ejs") %>
+
+
+    <body>
+
+        <div class="main-content">
+            <div class="header">
+                <div>Incidents</div>
+            </div>
+            <div class="block-content">
+                <%- include("./partials/search_list_index.ejs",{title:'Инциденты'}) %>
+                <div>
+                </div>
+                <%- include("./partials/search_list_index.ejs",{title:"Люди"}) %>
+            </div>
+            <div class="footer">
+                <%- include("./partials/footer.ejs") %>
+            </div>
+
+        </div>
+    </body>
+
+</html>
