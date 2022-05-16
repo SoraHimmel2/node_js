@@ -51,9 +51,7 @@ function createListElement(id, listItems) {
         </div>` ;
     let firstPart =
         `<div class="list-items-container">
-     <div class="container-start-part">
-        ${id}
-    </div>`
+     <div class="container-start-part">${id}</div>`
     listItems.forEach(element => {
         middlePart += `<li>${element}</li>`;
     });
@@ -121,9 +119,19 @@ function restrictInput(select,input){
 function redirect(url){
     window.location.href = url;
 }
-async function selectElements(requestId,requestUrl,element){
+async function selectElements(requestId,requestUrl,idName){
    const result = await sendData({id:requestId},requestUrl);
    console.log(result);
+   result.forEach(((element)=>{
+    let xpath = `//div[contains(@class,'container-start-part') and text() = '${element[idName]}']`;
+    console.log(xpath);
+    let matchingElement = document.evaluate(xpath,document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+    console.log(matchingElement);
+    const containerEndPart = matchingElement.parentElement.lastElementChild;
+    containerEndPart.firstElementChild.checked = true;
+    containerEndPart.lastElementChild.value = element['incident_relation'];
+    
+   }))
 }
 
 export {

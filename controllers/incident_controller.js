@@ -11,7 +11,7 @@ const incident_create = (req,res) => {
 
 
 const incident_update = (req,res) => {
-    console.log(req.url);
+    
     const requestUrl = new URL('http:/'+req.url);
     const searchParams = requestUrl.searchParams;
     const id = searchParams.get('id');
@@ -32,7 +32,7 @@ const incident_update = (req,res) => {
 
         res.render('incident/update_incident.ejs', { 
         title: 'Create a new incident',
-        controller:'incident_controller' ,
+        controller:'incident_update_controller' ,
         date:result['registration_date'].replaceAll(':','-'),
         description:result['description'],
         first_resolution:resolutionResult['Удовлетворено ходотайство об возбуждении уголовного дела'],

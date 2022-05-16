@@ -28,7 +28,7 @@ async function intermediary_get_persons(id){
     try {
         pool.connect();
        const result = await pool.query(
-        `SELECT person_number,incident_number FROM "intermediary" WHERE incident_number = $1;`
+        `SELECT person_number,incident_number,incident_relation FROM "intermediary" WHERE incident_number = $1;`
         ,[id]);
         return result;
     } catch (error) {

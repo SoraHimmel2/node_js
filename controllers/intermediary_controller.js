@@ -25,10 +25,11 @@ const incident_part = (req,res) => {
 }
 
 const incident_part_update = (req,res) => {
-    intermediary.intermediary_get_persons(req.body.id).then(()=>{
-        console.log(result);
+    intermediary.create_intermediary_table();
+    intermediary.intermediary_get_persons(req.body.id).then((result)=>{
+        res.json(result.rows);
     });
-    res.json({result:'good'});
+    
   
 }
 

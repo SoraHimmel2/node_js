@@ -45,6 +45,6 @@ addListElements('.list-items-ul', 'http://localhost:3000/incidents/get_all_perso
   const urlString = window.location.href;
   const url = new URL(urlString);
   const id = url.searchParams.get('id');
-  selectElements(id,'http://localhost:3000/incidents/person_get_intermediary',12);
+  selectElements(id,'http://localhost:3000/incidents/person_get_intermediary','person_number');
 });
    
