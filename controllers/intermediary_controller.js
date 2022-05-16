@@ -24,9 +24,18 @@ const incident_part = (req,res) => {
   
 }
 
+const incident_part_update = (req,res) => {
+    intermediary.intermediary_get_persons(req.body.id).then(()=>{
+        console.log(result);
+    });
+    res.json({result:'good'});
+  
+}
+
 
 
 module.exports = {
     person_part,
     incident_part,
+    incident_part_update,
 }

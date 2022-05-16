@@ -5,6 +5,7 @@ html, body {
     
     
 }
+
 .header {
     text-align: center;
     background-color: #000;
@@ -100,6 +101,7 @@ ul{
     overflow: hidden;
     overflow-y:scroll;
     max-height: 640px;
+    
 }
 
 .list-items-name{
@@ -203,3 +205,4 @@ input[class="search-input"]{
     display: flex;
     flex-direction: row;
 }
+

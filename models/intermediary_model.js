@@ -23,7 +23,21 @@ async function intermediary_insert(data){
     }
 }
 
+
+async function intermediary_get_persons(id){
+    try {
+        pool.connect();
+       const result = await pool.query(
+        `SELECT person_number,incident_number FROM "intermediary" WHERE incident_number = $1;`
+        ,[id]);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
 module.exports ={
     create_intermediary_table,
     intermediary_insert,
+    intermediary_get_persons,
 }

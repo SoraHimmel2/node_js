@@ -53,9 +53,27 @@ async function incident_get_id(data){
         return false;
     }
 }
+async function incident_get_all_by_id(id){
+    try {
+        pool.connect();
+       
+       const result = await pool.query(
+        `SELECT registration_number,
+        TO_CHAR(registration_date,'YYYY:MM:DD') registration_date,
+        description,
+        resolution_result,
+        case_number FROM "incident" WHERE registration_number = $1;`,[id]);
+        
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
 module.exports = {
     incident_create_table,
     incident_insert,
     incident_get_all_data,
     incident_get_id,
+    incident_get_all_by_id,
 }

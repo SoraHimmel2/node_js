@@ -121,6 +121,10 @@ function restrictInput(select,input){
 function redirect(url){
     window.location.href = url;
 }
+async function selectElements(requestId,requestUrl,element){
+   const result = await sendData({id:requestId},requestUrl);
+   console.log(result);
+}
 
 export {
     sendData,
@@ -131,5 +135,6 @@ export {
     dispatchData,
     restrictInput,
     redirect,
+    selectElements,
     
 }

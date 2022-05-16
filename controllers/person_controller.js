@@ -1,4 +1,5 @@
 const person = require("../models/person_model.js");
+const url = require('url');
 
 const person_index = (req, res) => {
 
@@ -6,12 +7,13 @@ const person_index = (req, res) => {
 }
 
 const person_create = (req, res) => {
+    
     res.render('person/create_person.ejs', { title: 'Create a new person', controller: 'person_controller' });
 
 }
 
 const person_update = (req, res) => {
-
+    res.render('person/create_person.ejs', { title: 'Create a new person', controller: 'person_controller' ,name:'',surname:'Surname'});
 }
 
 const person_delete = (req, res) => {
