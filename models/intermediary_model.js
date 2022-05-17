@@ -36,8 +36,47 @@ async function intermediary_get_persons(id){
         return false;
     }
 }
+async function intermediary_get_incidents(id){
+    try {
+        pool.connect();
+       const result = await pool.query(
+        `SELECT person_number,incident_number,incident_relation FROM "intermediary" WHERE person_number = $1;`
+        ,[id]);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
+async function intermediary_delete_person(id){
+    try {
+        pool.connect();
+       const result = await pool.query(
+        `DELETE person_number,incident_number,incident_relation FROM "intermediary" WHERE person_number = $1;`
+        ,[id]);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
+async function intermediary_delete_incident(id){
+    try {
+        pool.connect();
+       const result = await pool.query(
+        `DELETE person_number,incident_number,incident_relation FROM "intermediary" WHERE incident_number = $1;`
+        ,[id]);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
 module.exports ={
     create_intermediary_table,
     intermediary_insert,
     intermediary_get_persons,
+    intermediary_get_incidents,
+    intermediary_delete_person,
+    intermediary_delete_incident,
 }

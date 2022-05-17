@@ -71,7 +71,23 @@ const incident_create_post = (req,res) =>{
         }
     );
 }
-
+const incident_update_post = (req,res)=>{
+    console.log(req.body);
+    incident.incident_get_id(req.body.form).then(
+        (data) => {
+            console.log(data.rowCount);
+            if (data.rowCount > 0) {
+                console.log(`request - ${req.body.form}`);
+                res.json({ result: 'already-exist' });
+            } else {
+                console.log(`request ${req.body}`);
+                incident.incident_update(req.body.id,req.body.form).then(() => {
+                    res.json({result:'good'});
+                });
+            }
+        }
+    );
+}
 module.exports = {
     incident_index,
     incident_create,
@@ -79,5 +95,6 @@ module.exports = {
     incident_delete,
     incident_get_all,
     incident_create_post,
+    incident_update_post,
 }
 

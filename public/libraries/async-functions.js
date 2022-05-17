@@ -133,6 +133,33 @@ async function selectElements(requestId,requestUrl,idName){
     
    }))
 }
+async function dispatchDataForUpdate(formUrl, intermediaryUrl, formData,id,listElementSelector) {
+    console.log(formData);
+    console.log(id);
+    const result = await sendData({id:id,form:formData}, formUrl);
+    console.log(result);
+    if (result.result == 'good') {
+        const parts = [];
+        let elements = document.querySelectorAll(listElementSelector);
+        elements.forEach(element => {
+            if (element.firstElementChild.checked) {
+                let parentElement = element.parentElement;
+                let part = { id: parentElement.firstElementChild.textContent.trim(), guilty: element.lastElementChild.value }
+
+                parts.push(part);
+            }
+            
+
+        });
+       // let resultArray = { id_number: resultId.registration_number, rows: parts };
+        //const dispatchResult = await sendData(resultArray, intermediaryUrl);
+       // return dispatchResult;
+    }else{
+    alert('ошибка введеные данные уже существуют');
+    return false;
+    }
+  
+}
 
 export {
     sendData,
@@ -144,5 +171,6 @@ export {
     restrictInput,
     redirect,
     selectElements,
+    dispatchDataForUpdate,
     
 }

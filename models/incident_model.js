@@ -70,10 +70,37 @@ async function incident_get_all_by_id(id){
         return false;
     }
 }
+async function incident_update(id,data){
+    try {
+        pool.connect();
+       
+       const result = await pool.query(
+        `UPDATE incident
+        SET registration_date = $1,
+        description =$2,
+        resolution_result = $3,
+        case_number = $4
+        WHERE registration_number = $5;`,[
+            data['registration_date'],
+            data['description'],
+            data['resolution_result'],
+            data['case_number'],
+            id
+        ]);
+        
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
+
+
 module.exports = {
     incident_create_table,
     incident_insert,
     incident_get_all_data,
     incident_get_id,
     incident_get_all_by_id,
+    incident_update,
 }

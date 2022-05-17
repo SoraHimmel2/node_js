@@ -1,7 +1,7 @@
 import { sendData } from '../libraries/async-functions.js'
 import { getFormData } from '../libraries/async-functions.js'
 import { addListElements } from '../libraries/async-functions.js'
-import{dispatchData,restrictInput,selectElements} from '../libraries/async-functions.js'
+import{dispatchData,restrictInput,selectElements,dispatchDataForUpdate} from '../libraries/async-functions.js'
 
 
 
@@ -30,16 +30,19 @@ function restrictListener(event){
 
 
 async function invokeDispatch(target) {
-    const formUrl = 'http://localhost:3000/incidents/create_incident';
+    const formUrl = 'http://localhost:3000/incidents/update_incident';
     const intermediaryUrl = 'http://localhost:3000/incidents/incident_intermediary';
 
     target.preventDefault();
-    const dispatchResult = await dispatchData(formUrl, intermediaryUrl, getFormData(form),'.container-end-part');
-    console.log(dispatchResult)
+    dispatchDataForUpdate(formUrl, intermediaryUrl, getFormData(form),getUrlParametr('id'),'.container-end-part');
+    //console.log(dispatchResult)
 }
-
-
-
+function getUrlParametr(parametr){
+const urlString = window.location.href;
+  const url = new URL(urlString);
+  const id = url.searchParams.get(parametr);
+  return id;
+}
 addListElements('.list-items-ul', 'http://localhost:3000/incidents/get_all_persons', ['surname', 'name', 'patronymic'], 'registration_number')
 .then(()=>{
   const urlString = window.location.href;

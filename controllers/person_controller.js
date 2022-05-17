@@ -12,10 +12,29 @@ const person_create = (req, res) => {
 
 }
 
-const person_update = (req, res) => {
-    res.render('person/create_person.ejs', { title: 'Create a new person', controller: 'person_controller' ,name:'',surname:'Surname'});
-}
 
+const person_update = (req,res) => {
+    
+    const requestUrl = new URL('http:/'+req.url);
+    const searchParams = requestUrl.searchParams;
+    const id = searchParams.get('id');
+   
+   
+    person.person_get_all_by_id(id) 
+    .then((data)=>{
+        const result = data.rows['0'];
+        console.log(result);
+        res.render('person/update_person.ejs', { 
+        title: 'Изменить данные человека',
+        controller:'person_update_controller' ,
+        surname:result['surname'],
+        name:result['name'],
+        patronymic:result['patronymic'],
+        place_of_residence:result['place_of_residence'],
+        criminal_record_count:result['criminal_record_count']});
+    });
+    
+}
 const person_delete = (req, res) => {
 
 }
@@ -50,6 +69,9 @@ const person_create_post = (req, res) => {
     );
 
 }
+const person_update_post = (req,res) =>{
+
+}
 module.exports = {
     person_index,
     person_create,
@@ -57,4 +79,6 @@ module.exports = {
     person_delete,
     person_get_all,
     person_create_post,
+    person_update_post,
+    
 }
