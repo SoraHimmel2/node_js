@@ -73,20 +73,22 @@ const incident_create_post = (req,res) =>{
 }
 const incident_update_post = (req,res)=>{
     console.log(req.body);
+
     incident.incident_get_id(req.body.form).then(
         (data) => {
-            console.log(data.rowCount);
-            if (data.rowCount > 0) {
-                console.log(`request - ${req.body.form}`);
+            
+            if (data.rowCount == 1) {
+               
                 res.json({ result: 'already-exist' });
             } else {
-                console.log(`request ${req.body}`);
+              
                 incident.incident_update(req.body.id,req.body.form).then(() => {
                     res.json({result:'good'});
                 });
             }
         }
-    );
+    ).catch((error)=>{console.log(error)});
+    
 }
 module.exports = {
     incident_index,

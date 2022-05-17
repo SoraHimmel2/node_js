@@ -1,8 +1,11 @@
-import { addListElements ,redirect} from '../libraries/async-functions.js'
+import { addListElements ,redirect, sendData} from '../libraries/async-functions.js'
 const incidentUrl = 'http://localhost:3000/incidents/update_incident?id=';
 const personUrl = 'http://localhost:3000/incidents/update_person?id=';
 const incidentCreateUrl = 'http://localhost:3000/incidents/create_incident';
 const personCreateUrl = 'http://localhost:3000/incidents/create_person';
+
+
+
 function deleteSelect(){
     document.querySelectorAll('.list-items-select').forEach(
         (element)=>{element.remove();}
@@ -53,6 +56,9 @@ addListElements('.list-items-ul','http://localhost:3000/incidents/get_all_incide
     document.querySelector('.list-items').className = 'list-items-index';
     document.querySelector('body > div > div.block-content > div:nth-child(1) > div:nth-child(3) > button:nth-child(2)')
     .addEventListener('click',redirectToCreateIncident);
+    const button = document.querySelector('body > div > div.block-content > div:nth-child(1) > div:nth-child(3) > button:nth-child(1)');
+    console.log(button);
+    button.addEventListener('click',firstButtonDelete);
 
 });
 addListElements('.list-items-ul', 'http://localhost:3000/incidents/get_all_persons', ['surname', 'name', 'patronymic'], 'registration_number')
@@ -62,7 +68,38 @@ addListElements('.list-items-ul', 'http://localhost:3000/incidents/get_all_perso
     document.querySelector('.list-items').className = 'list-items-index';
     document.querySelector('body > div > div.block-content > div:nth-child(3) > div:nth-child(3) > button:nth-child(2)')
     .addEventListener('click',redirectToCreatePerson);
+    const button = document.querySelector('body > div > div.block-content > div:nth-child(3) > div:nth-child(3) > button:nth-child(1)');
+    button.addEventListener('click',secondButtonDelete);
+
 }
 
 );
+function firstButtonDelete(){
+    const url = 'http://localhost:3000/incidents/delete_incident';
+    deleteElements('.incident-list-ul .container-end-part',url);
+}
+function secondButtonDelete(){
+    const url = 'http://localhost:3000/incidents/delete_person';
+    deleteElements('.list-items-ul .container-end-part',url);
+}
 
+async function deleteElements(listElementSelector,deleteUrl){
+    let elements = document.querySelectorAll(listElementSelector);
+    
+    const parts = [];
+    elements.forEach(element => {
+        if (element.firstElementChild.checked) {
+            let parentElement = element.parentElement;
+            let part = { id: parentElement.firstElementChild.textContent.trim()};
+            parts.push(part);
+            element.parentElement.remove();
+        }
+     
+
+    });
+    console.log(parts);
+    const result =   await sendData(parts,deleteUrl);
+     console.log(result);
+    
+    
+}

@@ -51,14 +51,16 @@ const person_get_all = (req, res) => {
 }
 
 const person_create_post = (req, res) => {
+    
     person.person_get_id(req.body).then(
         (data) => {
             
             if (data.rowCount > 0) {
                 res.json({ result: 'already-exist' });
             } else {
+                
                 person.person_insert(req.body).then(() => {
-
+                    
                     person.person_get_id(req.body).then(
                         (data) => {
                             res.json(data.rows[0]);
@@ -69,9 +71,26 @@ const person_create_post = (req, res) => {
     );
 
 }
-const person_update_post = (req,res) =>{
+const person_update_post = (req,res)=>{
+    console.log(req.body);
 
+    person.person_get_id(req.body.form).then(
+        (data) => {
+            
+            if (data.rowCount > 1) {
+               
+                res.json({ result: 'already-exist' });
+            } else {
+              
+                person.person_update(req.body.id,req.body.form).then(() => {
+                    res.json({result:'good'});
+                });
+            }
+        }
+    ).catch((error)=>{console.log(error)});
+    
 }
+
 module.exports = {
     person_index,
     person_create,

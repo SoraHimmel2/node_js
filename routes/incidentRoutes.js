@@ -21,9 +21,12 @@ router.get('/update_person',personController.person_update);
 router.post('/update_person',personController.person_update_post);
 
 router.post('/incident_intermediary',intermediaryController.incident_part);
+router.post('/incident_get_intermediary',intermediaryController.person_part_update);
 router.post('/person_intermediary',intermediaryController.person_part);
 router.post('/person_get_intermediary',intermediaryController.incident_part_update);
-router.post('/incident_get_intermediary',intermediaryController.person_part_update);
+
+router.post('/delete_person',intermediaryController.person_delete);
+router.post('/delete_incident',intermediaryController.incident_delete);
 
 router.get('/main_page',index.index_index);
 

@@ -137,7 +137,7 @@ async function dispatchDataForUpdate(formUrl, intermediaryUrl, formData,id,listE
     console.log(formData);
     console.log(id);
     const result = await sendData({id:id,form:formData}, formUrl);
-    console.log(result);
+    console.log(`result is -> ${result}`);
     if (result.result == 'good') {
         const parts = [];
         let elements = document.querySelectorAll(listElementSelector);
@@ -151,9 +151,10 @@ async function dispatchDataForUpdate(formUrl, intermediaryUrl, formData,id,listE
             
 
         });
-       // let resultArray = { id_number: resultId.registration_number, rows: parts };
-        //const dispatchResult = await sendData(resultArray, intermediaryUrl);
-       // return dispatchResult;
+        let resultArray = { id_number: id, rows: parts };
+        console.log(resultArray);
+        const dispatchResult = await sendData(resultArray, intermediaryUrl);
+        return dispatchResult;
     }else{
     alert('ошибка введеные данные уже существуют');
     return false;

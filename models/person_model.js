@@ -16,7 +16,7 @@ async function person_create_table() {
 async function person_insert(data) {
     try {
         pool.connect();
-
+        
         await pool.query(
             `INSERT INTO "person" ("surname","name","patronymic","place_of_residence","criminal_record_count")
         VALUES ($1,$2,$3,$4,$5);`
@@ -80,6 +80,48 @@ async function person_get_all_by_id(id) {
         return false;
     }
 }
+async function person_update(id,data){
+    try {
+        pool.connect();
+       
+       const result = await pool.query(
+        `UPDATE person
+        SET surname = $1,
+        name =$2,
+        patronymic = $3,
+        place_of_residence = $4,
+        criminal_record_count = $5
+        WHERE registration_number = $6;`,[
+            data['surname'],
+            data['name'],
+            data['patronymic'],
+            data['place_of_residence'],
+            data['criminal_record_count'],
+            id
+        ]);
+        
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
+
+async function person_delete(id) {
+
+    try {
+        pool.connect();
+
+        const result = await pool.query(
+            `DELETE  FROM "person" WHERE registration_number = $1;
+             ;`
+            ,[id]);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
 
 module.exports = {
     person_create_table,
@@ -87,4 +129,7 @@ module.exports = {
     person_get_all_data,
     person_get_id,
     person_get_all_by_id,
+    person_update,
+    person_delete,
+
 }

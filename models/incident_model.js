@@ -43,7 +43,7 @@ async function incident_get_id(data){
     
     try {
         pool.connect();
-        
+      
        const result = await pool.query(
         `SELECT registration_number FROM "incident"  WHERE "registration_date" = $1 AND "description" = $2 AND "resolution_result" = $3;` 
         ,[data['registration_date'],data['description'],data['resolution_result']]);
@@ -95,6 +95,21 @@ async function incident_update(id,data){
     }
 }
 
+async function incident_delete(id) {
+
+    try {
+        pool.connect();
+
+        const result = await pool.query(
+            `DELETE  FROM "incident" WHERE registration_number = $1;
+             ;`
+            ,[id]);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
 
 module.exports = {
     incident_create_table,
@@ -103,4 +118,5 @@ module.exports = {
     incident_get_id,
     incident_get_all_by_id,
     incident_update,
+    incident_delete,
 }
