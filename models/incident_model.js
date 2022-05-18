@@ -111,6 +111,24 @@ async function incident_delete(id) {
     }
 }
 
+async function incident_get_count(firstDate,secondDate) {
+
+    try {
+        pool.connect();
+
+        const result = await pool.query(
+            `SELECT COUNT(registration_number) FROM "incident" WHERE registration_date >= $1 AND registration_date <= $2
+             ;`
+            ,[firstDate,secondDate]);
+            console.log('incidents count');
+            console.log(result.rows);
+        return result;
+    } catch (error) {
+        console.error(error.stack);
+        return false;
+    }
+}
+
 module.exports = {
     incident_create_table,
     incident_insert,
@@ -119,4 +137,5 @@ module.exports = {
     incident_get_all_by_id,
     incident_update,
     incident_delete,
+    incident_get_count,
 }

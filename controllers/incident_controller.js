@@ -90,6 +90,17 @@ const incident_update_post = (req,res)=>{
     ).catch((error)=>{console.log(error)});
     
 }
+const incident_get_count = (req,res)=>{
+    console.log(req.body);
+
+    incident.incident_get_count(req.body.firstDate,req.body.secondDate).then(
+        (data) => {
+            res.json(data.rows);
+            
+        }
+    ).catch((error)=>{console.log(error)});
+    
+}
 module.exports = {
     incident_index,
     incident_create,
@@ -98,5 +109,6 @@ module.exports = {
     incident_get_all,
     incident_create_post,
     incident_update_post,
+    incident_get_count
 }
 

@@ -104,7 +104,14 @@ const incident_delete = (req, res) => {
     res.json({ result: 'good' });
 
 }
-
+const person_incidents = (req,res) =>{
+    
+    intermediary.intermediary_get_incidents(req.body.id).then((data)=>{
+        console.log('inpt');
+    console.log(data.rows.length);
+        res.json(data.rows.length);
+    })
+}
 module.exports = {
     person_part,
     incident_part,
@@ -112,4 +119,5 @@ module.exports = {
     person_part_update,
     person_delete,
     incident_delete,
+    person_incidents,
 }

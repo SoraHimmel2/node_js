@@ -73,6 +73,8 @@ async function intermediary_delete_incidents(id){
         return false;
     }
 }
+
+
 module.exports ={
     create_intermediary_table,
     intermediary_insert,

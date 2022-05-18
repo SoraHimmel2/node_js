@@ -9,11 +9,47 @@
             <div class="header">
                 <div>Incidents</div>
             </div>
+            <div class="functions">
+                <div class="functions-items">
+                    <div class="person-incident-count list-items-name">
+                        <div class="w3-container w3-theme">
+                            <h3>Рассчитать количество инцидентов для человека</h3>
+                        </div>
+                       
+                    </div>
+                    <div class="w3-container w3-theme">
+                        <h3>Введите номер человека</h3>
+                    </div>
+
+                    <div>
+                        <input type="text" id="description" name="description" class="person-input">
+                        <button class="person-button form-button">Рассчитать</button>
+                    </div>
+                </div>
+                <div></div>
+                <div class="functions-items">
+                    
+                    <div class="incindent-data-count list-items-name">
+                        <div class="w3-container w3-theme">
+                            <h3>Количество происшествий в указанный промежуток времени</h3>
+                        </div>
+                        
+                    </div>
+                    <div class="w3-container w3-theme">
+                        <h3>Введите промежутки времени</h3>
+                    </div>
+                    <div>
+                        <input type="date" id="description" name="firstPart" class="firstIncidentInput">
+                        <input type="date" id="description" name="endPart" class="secondIncidentInput">
+                        <button class="incident-button form-button">Рассчитать</button>
+                    </div>
+                </div>
+            </div>
             <div class="block-content">
                 <%- include("./partials/search_list_index.ejs",{title:'Инциденты'}) %>
-                <div>
-                </div>
-                <%- include("./partials/search_list_index.ejs",{title:"Люди"}) %>
+                    <div>
+                    </div>
+                    <%- include("./partials/search_list_index.ejs",{title:"Люди"}) %>
             </div>
             <div class="footer">
                 <%- include("./partials/footer.ejs") %>

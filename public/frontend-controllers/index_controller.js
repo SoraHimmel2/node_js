@@ -4,7 +4,23 @@ const personUrl = 'http://localhost:3000/incidents/update_person?id=';
 const incidentCreateUrl = 'http://localhost:3000/incidents/create_incident';
 const personCreateUrl = 'http://localhost:3000/incidents/create_person';
 
+const firstButton = document.querySelector('.person-button');
+firstButton.addEventListener('click',addGetIncidents);
 
+const secondButton = document.querySelector('.incident-button');
+secondButton.addEventListener('click',addIncidentCount);
+
+function addGetIncidents(){
+    const input = document.querySelector('.person-input');
+    const url = 'http://localhost:3000/incidents/person_incidents';
+    getPersonIncidentsCount(input,url);
+}
+function addIncidentCount(){
+    const url = 'http://localhost:3000/incidents/incident_count';
+    const firstDate = document.querySelector('.firstIncidentInput');
+    const secondDate = document.querySelector('.secondIncidentInput');
+    getIncidentCount(firstDate,secondDate,url);
+}
 
 function deleteSelect(){
     document.querySelectorAll('.list-items-select').forEach(
@@ -102,4 +118,23 @@ async function deleteElements(listElementSelector,deleteUrl){
      console.log(result);
     
     
+}
+async function getPersonIncidentsCount(input,dispatchUrl){
+    if (!input.value){
+        console.log('bad input');
+        alert('Ошибка ввода')
+    }else{
+    const result = await sendData({id:input.value},dispatchUrl);
+    alert(`Количество инцидентов -> ${result}`);
+    }
+}
+
+async function getIncidentCount(firstDate,secondDate,dispatchUrl){
+    if (!firstDate.value || !secondDate.value){
+        console.log('bad input');
+        alert('Ошибка ввода')
+    }else{
+    const result = await sendData({firstDate:firstDate.value,secondDate:secondDate.value},dispatchUrl);
+    alert(`Количество инцидентов -> ${result[0]['count']}`);
+    }
 }
